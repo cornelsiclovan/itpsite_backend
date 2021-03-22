@@ -1,0 +1,10 @@
+[{
+    "telefon": "0766992525",
+    "pret_itp_taxi": "100",
+    "pret_itp_autoturism" : "150",
+    "pret_itp_autoutilitara":  "200",
+    "luni_vineri_ora_deschidere": "11:00",
+    "luni_vineri_ora_inchidere": "19:00",
+    "sambata_ora_deschidere": "08:00",
+    "sambata_ora_inchidere": "14:00"
+}]
