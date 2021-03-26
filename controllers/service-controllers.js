@@ -32,6 +32,18 @@ const getServices = async (req, res, next) => {
     res.json({services: serializedData.map(service => service)})
 }
 
+const getServiceById = async (req, res, next) => {
+    const serviceId = req.params.id;
+    
+    let service;
+
+    try {
+        service = await Service.findById(serviceId);
+    } catch (err){}
+
+    res.status(200).json({service: service.toObject({ getters: true })});
+}
+
 const postService = async (req, res, next) => {
     const {
        name,
@@ -85,3 +97,4 @@ const patchService = async (req, res, next) => {
 exports.getServices = getServices;
 exports.patchService = patchService;
 exports.postService = postService;
+exports.getServiceById = getServiceById;

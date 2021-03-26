@@ -20,11 +20,24 @@ const getContacts = async (req, res, next) => {
 
     serializedData = contacts.map(contact => {
         return {
+            id: contact._id,
             telefon: contact.telefon
         }
     })
 
     res.json({contacts: serializedData.map(contact => contact)})
+}
+
+const getContactById = async (req, res, next) => {
+    const contactId = req.params.id;
+    console.log(contactId);
+    let contact;
+
+    try {
+        contact = await Contact.findById(contactId);
+    } catch (err){}
+
+    res.status(200).json({contact: contact.toObject({ getters: true })});
 }
 
 const postContact = async (req, res, next) => {
@@ -68,3 +81,4 @@ const patchContact = async (req, res, next) => {
 exports.getContacts = getContacts;
 exports.patchContact = patchContact;
 exports.postContact = postContact;
+exports.getContactById = getContactById;

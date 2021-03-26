@@ -29,6 +29,18 @@ const getPrograms = async (req, res, next) => {
     res.json({programs: serializedData.map(program => program)})
 }
 
+const getProgramById = async (req, res, next) => {
+    const programId = req.params.id;
+
+    let program;
+
+    try {
+        program = await Program.findById(programId);
+    } catch (err){}
+
+    res.status(200).json({program: program.toObject({ getters: true })});
+}
+
 const postProgram = async (req, res, next) => {
     const {
        tip_program,
@@ -78,3 +90,4 @@ const patchProgram = async (req, res, next) => {
 exports.getPrograms = getPrograms;
 exports.patchProgram = patchProgram;
 exports.postProgram = postProgram;
+exports.getProgramById = getProgramById;
