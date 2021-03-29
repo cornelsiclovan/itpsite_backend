@@ -41,7 +41,7 @@ app.use((error, req, res, next) => {
     res.json({message: error.message || 'An unknown error occured!'})
 });
 let mongoose_uri='';
-if (process.env.MONGODB_USER && process.env.MONGODB_USER.length > 0 && process.env.MONGODB_DATABASE && process.env.MONGODB_DATABASE.length > 0) {
+if (process.env.MONGODB_USER && process.env.MONGODB_USER.length > 0 && process.env.MONGODB_PASSWORD && process.env.MONGODB_PASSWORD.length > 0) {
     mongoose_uri=`mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOST}/${process.env.MONGODB_DATABASE}`
 } else {
     mongoose_uri=`mongodb://${process.env.MONGODB_HOST}/${process.env.MONGODB_DATABASE}`
