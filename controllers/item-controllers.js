@@ -13,7 +13,7 @@ const getItems = async (req, res, next) => {
     try {
         items = await Item.find({});
     } catch (err) {
-        return next(new HttpError("Error fetching data"));
+        return next(new HttpError("Error fetching data:",err));
     }
 
     serializedData = items.map(item => {

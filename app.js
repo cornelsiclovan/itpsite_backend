@@ -5,8 +5,6 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-console.log(process.env.MONGODB_HOST);
-
 const contactRoutes = require('./routes/contact-routes');
 const serviceRoutes = require('./routes/service-routes');
 const programRoutes = require('./routes/program-routes');
@@ -42,8 +40,13 @@ app.use((error, req, res, next) => {
     res.status(error.code || 500);
     res.json({message: error.message || 'An unknown error occured!'})
 });
-
-mongoose.connect(`mongodb://${process.env.MONGODB_HOST}/sorin_itp`)
+let mongoose_uri='';
+if (process.env.MONGODB_USER && process.env.MONGODB_USER.length > 0 && process.env.MONGODB_DATABASE && process.env.MONGODB_DATABASE.length > 0) {
+    mongoose_uri=`mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOST}/${process.env.MONGODB_DATABASE}`
+} else {
+    mongoose_uri=`mongodb://${process.env.MONGODB_HOST}/${process.env.MONGODB_DATABASE}`
+}
+mongoose.connect(mongoose_uri)
     .then(() => {
         console.log('Connected to MongoDB...');
         app.listen(5000);

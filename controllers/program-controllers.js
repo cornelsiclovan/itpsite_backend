@@ -12,7 +12,7 @@ const getPrograms = async (req, res, next) => {
     try {
         programs = await Program.find({});
     } catch (err) {
-        return next(new HttpError("Error fetching data"));
+        return next(new HttpError("Error fetching data:",err));
     }
 
     console.log(programs);

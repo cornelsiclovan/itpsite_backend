@@ -13,7 +13,7 @@ const getContacts = async (req, res, next) => {
     try {
         contacts = await Contact.find({});
     } catch (err) {
-        return next(new HttpError("Error fetching data"));
+        return next(new HttpError("Error fetching data:",err));
     }
 
     console.log(contacts);
